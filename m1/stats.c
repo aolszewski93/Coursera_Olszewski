@@ -52,7 +52,7 @@ void print_array(unsigned char *data, unsigned int size) {
 unsigned char find_median(unsigned char *data, unsigned int size) {
   // Calculate the median value of the array.
   // First, sort the array
-  unsigned char sorted_array = sort_array(data, size);
+  sort_array(data, size);
   if (size % 2 == 0) {
     return (data[size / 2 - 1] + data[size / 2]) / 2;
   }
