@@ -44,7 +44,7 @@ void print_array(unsigned char *data, unsigned int size) {
   for (unsigned int i = 0; i < size; i++) {
     printf("%d ", data[i]);
     if ((i+1) % 10 == 0) {
-      print("\n");
+      printf("\n");
     }
   }
 }
