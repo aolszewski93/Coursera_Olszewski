@@ -38,6 +38,21 @@ LDFLAGS =
 CFLAGS = -Wall -Werror -g -O0 -std=c99
 CPPFLAGS = -DHOST $(INCLUDES)
 
+else ifeq ($(PLATFORM), MSP432)
+# Architectures Specific Flags
+LINKER_FILE = -T msp432p401r.lds
+CPU = mcpu=cortex-m4
+ARCH = -mthumb -march=armv7e-m
+SPECS = --specs=nosys.specs
+
+# Compiler Flags and Defines
+CC = arm-none-eabi-gcc
+LD = arm-none-eabi-gcc
+LDFLAGS = $(LINKER_FILE) $(SPECS)
+CFLAGS = -Wall -Werror -g -O0 -std=c99 $(CPU) $(ARCH) -mfloat-abi=hard -mfpu=fpv4-sp-d16
+CPPFLAGS = -DMSP432 $(INCLUDES)
+
+
 endif
 
 # Object Files
