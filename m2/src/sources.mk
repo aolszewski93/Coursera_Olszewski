@@ -9,9 +9,16 @@
 #
 #*****************************************************************************
 
+ifeq ($(PLATFORM), HOST)
 # Add your Source files to this variable
-SOURCES =
+SOURCES = \
+  src/main.c \
+  src/memory.c
 
 # Add your include paths to this variable
-INCLUDES = 
+INCLUDES = \
+  -Iinclude/common
+
+endif
+
 
