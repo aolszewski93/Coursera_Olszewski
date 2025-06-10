@@ -12,12 +12,12 @@
 ifeq ($(PLATFORM), HOST)
 # Add your Source files to this variable
 SOURCES = \
-  src/main.c \
-  src/memory.c
+  main.c \
+  memory.c
 
 # Add your include paths to this variable
 INCLUDES = \
-  -Iinclude/common
+  -I../include/common
 
 endif
 

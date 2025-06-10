@@ -23,8 +23,6 @@
 #------------------------------------------------------------------------------
 include sources.mk
 
-# Platform Overrides
-PLATFORM = 
 
 ifeq ($(PLATFORM), HOST)
 # Architectures Specific Flags
@@ -36,8 +34,26 @@ SPECS =
 # Compiler Flags and Defines
 CC = gcc
 LD = gcc
-LDFLAGS = -Wall -Werror -g -O0 -std=c99
-CFLAGS = 
-CPPFLAGs = -DHOST $(INCLUDES)
+LDFLAGS = 
+CFLAGS = -Wall -Werror -g -O0 -std=c99
+CPPFLAGS = -DHOST $(INCLUDES)
 
 endif
+
+# Object Files
+OBJS = $(SOURCES:.c=.o)
+
+# Default build target
+build: $(OBJS)
+	$(LD) $(LDFLAGS) -o c1m2.out $(OBJS)
+
+# Compile source files to object files
+%.o: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+# Clean target to remove build artifacts
+.PHONY: clean 
+clean:
+	rm -f src/*.o c1m2.out *.map *.i *.asm *.d
+
+	
