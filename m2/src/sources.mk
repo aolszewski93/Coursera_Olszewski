@@ -26,7 +26,7 @@ SOURCES = \
   memory.c \
   interrupts_msp432p401r_gcc.c \
   startup_msp432p401r_gcc.c \
-  system_msp432p401r_gcc.c
+  system_msp432p401r.c
 
 INCLUDES = \
   -I../include/common \

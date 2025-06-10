@@ -40,8 +40,8 @@ CPPFLAGS = -DHOST $(INCLUDES)
 
 else ifeq ($(PLATFORM), MSP432)
 # Architectures Specific Flags
-LINKER_FILE = -T msp432p401r.lds
-CPU = mcpu=cortex-m4
+LINKER_FILE = -T ../msp432p401r.lds
+CPU = -mcpu=cortex-m4
 ARCH = -mthumb -march=armv7e-m
 SPECS = --specs=nosys.specs
 
@@ -49,7 +49,9 @@ SPECS = --specs=nosys.specs
 CC = arm-none-eabi-gcc
 LD = arm-none-eabi-gcc
 LDFLAGS = $(LINKER_FILE) $(SPECS)
-CFLAGS = -Wall -Werror -g -O0 -std=c99 $(CPU) $(ARCH) -mfloat-abi=hard -mfpu=fpv4-sp-d16
+CFLAGS = -Wall -Werror -g -O0 -std=c99 \
+	 $(CPU) $(ARCH) \
+	 -mfloat-abi=hard -mfpu=fpv4-sp-d16 
 CPPFLAGS = -DMSP432 $(INCLUDES)
 
 
@@ -62,6 +64,10 @@ OBJS = $(SOURCES:.c=.o)
 build: $(OBJS)
 	$(LD) $(LDFLAGS) -o c1m2.out $(OBJS)
 
+# special compile rule for interrupts
+interrupts_msp432p401r_gcc.o: interrupts_msp432p401r_gcc.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -mgeneral-regs-only -c $< -o $@
+
 # Compile source files to object files
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -69,6 +75,8 @@ build: $(OBJS)
 # Clean target to remove build artifacts
 .PHONY: clean 
 clean:
-	rm -f src/*.o c1m2.out *.map *.i *.asm *.d
+	rm -f *.o c1m2.out *.map *.i *.asm *.d
 
+# for debugging
+# $(info SOURCES = $(SOURCES))
 	
