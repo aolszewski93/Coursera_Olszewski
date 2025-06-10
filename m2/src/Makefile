@@ -26,6 +26,7 @@ include sources.mk
 # Platform Overrides
 PLATFORM = 
 
+ifeq ($(PLATFORM), HOST)
 # Architectures Specific Flags
 LINKER_FILE = 
 CPU = 
@@ -33,9 +34,10 @@ ARCH =
 SPECS = 
 
 # Compiler Flags and Defines
-CC = 
-LD = 
-LDFLAGS = 
+CC = gcc
+LD = gcc
+LDFLAGS = -Wall -Werror -g -O0 -std=c99
 CFLAGS = 
-CPPFLAGs = 
+CPPFLAGs = -DHOST $(INCLUDES)
 
+endif
