@@ -85,10 +85,16 @@ c1m2.disasm: c1m2.out
 # include .d files if they exist
 -include *.d
 
+# compile all
+.PHONY: compile-all
+compile-all: $(OBJS)
+
 # Clean target to remove build artifacts
 .PHONY: clean 
 clean:
 	rm -f *.o c1m2.out *.map *.i *.asm *.d
+
+.PHONY: build
 
 # for debugging
 # $(info SOURCES = $(SOURCES))
