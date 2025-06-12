@@ -48,10 +48,8 @@ SPECS = --specs=nosys.specs
 # Compiler Flags and Defines
 CC = arm-none-eabi-gcc
 LD = arm-none-eabi-gcc
-LDFLAGS = $(LINKER_FILE) $(SPECS)
-CFLAGS = -Wall -Werror -g -O0 -std=c99 \
-	 $(CPU) $(ARCH) \
-	 -mfloat-abi=hard -mfpu=fpv4-sp-d16 
+LDFLAGS = $(LINKER_FILE) $(SPECS) -mcpu=cortex-m4 -mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16
+CFLAGS = -Wall -Werror -g -O0 -std=c99 -mcpu=cortex-m4 -mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16
 CPPFLAGS = -DMSP432 $(INCLUDES)
 
 
@@ -67,6 +65,18 @@ build: $(OBJS)
 # special compile rule for interrupts
 interrupts_msp432p401r_gcc.o: interrupts_msp432p401r_gcc.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -mgeneral-regs-only -c $< -o $@
+
+# generate preprocessed code
+%.i: %.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -E $< -o $@
+
+# compile assembly from source
+%.asm: %.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -S $< -o $@
+
+# diassembly from final executable using objdump
+c1m2.disasm: c1m2.out
+	arm-none-eabi-objdump -d c1m2.out > c1m2.disasm
 
 # Compile source files to object files
 %.o: %.c
