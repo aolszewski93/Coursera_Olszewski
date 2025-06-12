@@ -10,15 +10,34 @@
 #*****************************************************************************
 
 #------------------------------------------------------------------------------
-# <Put a Description Here>
+# This Makefile provides a flexible build system for compiling a C-based embedded systems project for two platforms: the native HOST environment and the target MSP432 microcontroller.
+#
+# It supports:
+#	•	Native compilation using gcc
+#	•	Cross-compilation using arm-none-eabi-gcc for ARM Cortex-M4
+#	•	Modular flags for platform-specific compilation and linking
+#	•	Generation of build artifacts:
+#	•	Preprocessed source files (*.i)
+#	•	Assembly files (*.asm)
+#	•	Object files (*.o)
+#	•	Dependency files (*.d)
+#	•	Linker map files (*.map)
+#	•	Final executable (c1m2.out)
+#	•	Disassembly from executable (c1m2.disasm)
 #
 # Use: make [TARGET] [PLATFORM-OVERRIDES]
 #
 # Build Targets:
-#      <Put a description of the supported targets here>
+#      build         - Compile all source files and link into c1m2.out
+#      compile-all   - Compile all source files to object files without linking
+#      clean         - Remove all generated files (objects, output, map, etc.)
+#      %.i           - Generate preprocessed output for a given C source file
+#      %.asm         - Generate assembly output for a given C source file
+#      c1m2.disasm   - Generate disassembled output from final executable
 #
 # Platform Overrides:
-#      <Put a description of the supported Overrides here
+#      PLATFORM=HOST     - Compile using native GCC for testing on the host machine
+#      PLATFORM=MSP432   - Cross-compile using arm-none-eabi-gcc for the MSP432 target
 #
 #------------------------------------------------------------------------------
 include sources.mk
