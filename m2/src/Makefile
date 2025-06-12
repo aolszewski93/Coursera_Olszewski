@@ -35,7 +35,7 @@ SPECS =
 CC = gcc
 LD = gcc
 LDFLAGS = 
-CFLAGS = -Wall -Werror -g -O0 -std=c99
+CFLAGS = -Wall -Werror -g -O0 -std=c99 -MMD
 CPPFLAGS = -DHOST $(INCLUDES)
 
 else ifeq ($(PLATFORM), MSP432)
@@ -49,7 +49,7 @@ SPECS = --specs=nosys.specs
 CC = arm-none-eabi-gcc
 LD = arm-none-eabi-gcc
 LDFLAGS = $(LINKER_FILE) $(SPECS) -mcpu=cortex-m4 -mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16
-CFLAGS = -Wall -Werror -g -O0 -std=c99 -mcpu=cortex-m4 -mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16
+CFLAGS = -Wall -Werror -g -O0 -std=c99 -mcpu=cortex-m4 -mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16 -MMD
 CPPFLAGS = -DMSP432 $(INCLUDES)
 
 
@@ -81,6 +81,9 @@ c1m2.disasm: c1m2.out
 # Compile source files to object files
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+# include .d files if they exist
+-include *.d
 
 # Clean target to remove build artifacts
 .PHONY: clean 
