@@ -21,6 +21,7 @@
  */
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "misc.h"
 
 static int g1;
@@ -33,10 +34,12 @@ int main()
 {
   register int l1;
   int * l2;
+  printf("Address of pointer variable l2: %p\n", (void*)&l2);
   volatile int l3 = 12;
   
   l2 = (int *) malloc( N * g2 * sizeof(char) );
 
+  printf("Address of malloc'd 12: %p\n", (void*)l2);
   if ( ! l2 )
   {
     return -1;
