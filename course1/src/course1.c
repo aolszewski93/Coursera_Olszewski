@@ -20,6 +20,8 @@
 #include <stdint.h>
 #include "course1.h"
 #include "platform.h"
+#include "data.h"
+#include "course1.h"
 #include "memory.h"
 #include "stats.h"
 

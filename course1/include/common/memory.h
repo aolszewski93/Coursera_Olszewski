@@ -90,4 +90,100 @@ void set_all(char * ptr, char value, unsigned int size);
  */
 void clear_all(char * ptr, unsigned int size);
 
+/**
+ * @brief Moves data from one memory location to another
+ *
+ * Given a pointer to a source and destination data set, this will move
+ * a number of elements from the source to the destination. The length is
+ * determined by the provided size parameter.
+ *
+ * @param src Pointer to source data array
+ * @param dst Pointer to destination data array
+ * @param size Number of elements to copy
+ *
+ * @return ptr_dst Pointer to the destination.
+ */
+unint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
+
+/**
+ * @brief Copies data from one memory location to another
+ * 
+ * Given a pointer to a source and destination data set, this will copy
+ * a number of elements from the source to the destination. The length is
+ * determined by the provided size parameter. This function does not
+ * handle overlapping memory regions.
+ * 
+ * @param src Pointer to source data array
+ * @param dst Pointer to destination data array
+ * @param length Number of bytes to copy
+ * 
+ * @return ptr_dst Pointer to the destination.
+ */
+unint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length);
+
+/**
+ * @brief Sets all locations in a memory region to a specific value
+ * 
+ * Given a pointer to a memory region, this function sets all bytes
+ * in that region to a specific value. 
+ * 
+ * @param src Pointer to the memory region
+ * @param length Number of bytes to set
+ * @param value The value to set each byte to
+ * 
+ * @return src_ptr Pointer to the source memory region.
+ */
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value);
+
+/**
+ * @brief Sets all locations in a memory region to zero
+ * 
+ * Given a pointer to a memory region and length in bytes, 
+ * this function sets all bytes in that region to zero.
+ * 
+ * @param src Pointer to the memory region
+ * @param length Number of bytes to set to zero
+ * 
+ * @return src_ptr Pointer to the source memory region.
+ */
+uint8_t * my_memzero(uint8_t * src, size_t length);
+
+/**
+ * @brief Reverses the order of bytes in a memory region
+ * 
+ * Given a pointer to a memory region and its length, this function
+ * reverses the order of bytes in that region.
+ * 
+ * @param src Pointer to the memory region
+ * @param length Number of bytes to reverse
+ * 
+ * @return src_ptr Pointer to the source memory region.
+ */
+uint8_t * my_reverse(uint8_t * src, size_t length);
+
+
+/**
+ * @brief Reserves a block of dynamic memory for words
+ * 
+ * This function reserves a block of memory for a specified number of
+ * 32-bit words. It allocates memory dynamically and returns a pointer to
+ * memory if successful, or NULL if allocation fails.
+ * 
+ * @param length The number of 32-bit words to reserve
+ * 
+ * @return value A pointer to the reserved memory block, or NULL if allocation fails.
+ */
+int32_t * reserve_words(size_t length);
+
+/**
+ * @brief Frees a block of dynamically allocated memory
+ * 
+ * This function frees a block of memory that was previously reserved
+ * using the reserve_words function. It takes a pointer to the memory
+ * block to be freed.
+ * 
+ * @param src Pointer to the memory block to free
+ */
+void free_words(int32_t * src);
+
 #endif /* __MEMORY_H__ */
