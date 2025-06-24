@@ -55,7 +55,7 @@ CC = gcc
 LD = gcc
 LDFLAGS = 
 CFLAGS = -Wall -Werror -g -O0 -std=c99 -MMD
-CPPFLAGS = -DHOST $(INCLUDES)
+CPPFLAGS = -DHOST -DCOURSE1 -DVERBOSE -$(INCLUDES)
 
 else ifeq ($(PLATFORM), MSP432)
 # Architectures Specific Flags
@@ -79,7 +79,7 @@ OBJS = $(SOURCES:.c=.o)
 
 # Default build target
 build: $(OBJS)
-	$(LD) $(LDFLAGS) -o c1m2.out $(OBJS)
+	$(LD) $(LDFLAGS) -o main.out $(OBJS)
 
 # special compile rule for interrupts
 interrupts_msp432p401r_gcc.o: interrupts_msp432p401r_gcc.c
@@ -94,7 +94,7 @@ interrupts_msp432p401r_gcc.o: interrupts_msp432p401r_gcc.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -S $< -o $@
 
 # diassembly from final executable using objdump
-c1m2.disasm: c1m2.out
+c1m2.disasm: main.out
 	arm-none-eabi-objdump -d c1m2.out > c1m2.disasm
 
 # Compile source files to object files
@@ -111,7 +111,7 @@ compile-all: $(OBJS)
 # Clean target to remove build artifacts
 .PHONY: clean 
 clean:
-	rm -f *.o c1m2.out *.map *.i *.asm *.d
+	rm -f *.o main.out *.map *.i *.asm *.d
 
 .PHONY: build
 

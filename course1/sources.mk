@@ -12,8 +12,11 @@
 ifeq ($(PLATFORM), HOST)
 # Add your Source files to this variable
 SOURCES = \
-  main.c \
-  memory.c
+  src/main.c \
+  src/memory.c \
+  src/course1.c \
+  src/stats.c \
+  src/data.c
 
 # Add your include paths to this variable
 INCLUDES = \
@@ -22,11 +25,14 @@ INCLUDES = \
 else ifeq ($(PLATFORM), MSP432)
 # Add your Source files to this variable
 SOURCES = \
-  main.c \
-  memory.c \
-  interrupts_msp432p401r_gcc.c \
-  startup_msp432p401r_gcc.c \
-  system_msp432p401r.c
+  src/main.c \
+  src/memory.c \
+  src/interrupts_msp432p401r_gcc.c \
+  src/startup_msp432p401r_gcc.c \
+  src/system_msp432p401r.c \
+  src/course1.c \
+  src/data.c \
+  src/stats.c
 
 INCLUDES = \
   -I../include/common \
