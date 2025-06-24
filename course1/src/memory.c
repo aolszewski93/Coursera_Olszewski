@@ -48,3 +48,48 @@ void clear_all(char * ptr, unsigned int size){
   set_all(ptr, 0, size);
 }
 
+
+/* placeholder for new functions */
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {
+  // insert code here
+  return dst;
+}
+
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) {
+  // insert code here
+  return dst;
+}
+
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
+  for (size_t i = 0; i < length; i++) {
+    src[i] = value;
+  }
+  return src_ptr;
+}
+
+uint8_t * my_memzero(uint8_t * src, size_t length) {
+  my_memset(src, length, 0);
+  //return src_ptr;
+  return 0;
+}
+
+void my_reverse(uint8_t * src, size_t length) {
+  uint8_t temp;
+  for (size_t i = 0; i < length / 2; i++) {
+    temp = src[i];
+    src[i] = src[length - i - 1];
+    src[length - i - 1] = temp;
+  }
+  //return ptr_src;
+  return 0;
+}
+
+int32_t * reserve_words(size_t length) {
+  //return value;
+  return 0; // Placeholder for memory allocation logic
+}
+
+void free_words(int32_t * src) {
+  // Placeholder for memory deallocation logic
+  return;
+}
