@@ -55,7 +55,7 @@ CC = gcc
 LD = gcc
 LDFLAGS = 
 CFLAGS = -Wall -Werror -g -O0 -std=c99 -MMD
-CPPFLAGS = -DHOST -DCOURSE1 -DVERBOSE -$(INCLUDES)
+CPPFLAGS = -DHOST -DCOURSE1 -DVERBOSE $(INCLUDES)
 
 else ifeq ($(PLATFORM), MSP432)
 # Architectures Specific Flags
@@ -98,7 +98,7 @@ c1m2.disasm: main.out
 	arm-none-eabi-objdump -d c1m2.out > c1m2.disasm
 
 # Compile source files to object files
-%.o: %.c
+src/%.o: src/%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # include .d files if they exist

@@ -27,6 +27,5 @@ int main(void) {
 #endif
 	return 0;
 
-/* A pretty boring main file
 }
 

@@ -21,7 +21,6 @@
 #include "course1.h"
 #include "platform.h"
 #include "memory.h"
-#include "data.h"
 #include "stats.h"
 
 int8_t test_data1() {

@@ -15,12 +15,12 @@ SOURCES = \
   src/main.c \
   src/memory.c \
   src/course1.c \
-  src/stats.c \
-  src/data.c
+  src/data.c \
+  src/stats.c
 
 # Add your include paths to this variable
 INCLUDES = \
-  -I../include/common
+  -Iinclude/common
 
 else ifeq ($(PLATFORM), MSP432)
 # Add your Source files to this variable
@@ -35,9 +35,9 @@ SOURCES = \
   src/stats.c
 
 INCLUDES = \
-  -I../include/common \
-  -I../include/msp432 \
-  -I../include/CMSIS
+  -Iinclude/common \
+  -Iinclude/msp432 \
+  -Iinclude/CMSIS
 
 endif
 
