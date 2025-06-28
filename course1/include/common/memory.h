@@ -22,6 +22,9 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
+#include <stdint.h>
+#include <stdlib.h>
+
 /**
  * @brief Sets a value of a data array 
  *
@@ -103,7 +106,7 @@ void clear_all(char * ptr, unsigned int size);
  *
  * @return dst Pointer to the destination.
  */
-unint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
 
 /**
  * @brief Copies data from one memory location to another
@@ -119,7 +122,7 @@ unint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
  * 
  * @return dst Pointer to the destination.
  */
-unint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length);
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length);
 
 /**
  * @brief Sets all locations in a memory region to a specific value

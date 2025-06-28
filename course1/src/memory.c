@@ -105,11 +105,8 @@ uint8_t * my_memzero(uint8_t * src, size_t length) {
   return src;
 }
 
-void my_reverse(uint8_t * src, size_t length) {
+uint8_t * my_reverse(uint8_t * src, size_t length) {
   // reverse the order of bytes from src to end of length
-  if (src == NULL || length == 0) {
-    return; // No operation needed if src is NULL or length is zero
-  }
   // Swap bytes in place
   // Using a temporary variable to swap elements
   uint8_t temp;

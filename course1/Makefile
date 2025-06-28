@@ -111,7 +111,7 @@ compile-all: $(OBJS)
 # Clean target to remove build artifacts
 .PHONY: clean 
 clean:
-	rm -f *.o main.out *.map *.i *.asm *.d
+	rm -f src/*.o src/main.out src/*.map src/*.i src/*.asm src/*.d
 
 .PHONY: build
 

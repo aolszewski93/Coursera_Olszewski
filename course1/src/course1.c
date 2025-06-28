@@ -39,16 +39,18 @@ int8_t test_data1() {
     return TEST_ERROR;
   }
 
-  digits = my_itoa( num, ptr, BASE_16);   
+  digits = my_itoa( num, ptr, BASE_16); 
   value = my_atoi( ptr, digits, BASE_16);
   #ifdef VERBOSE
+  PRINTF(" Converted to ASCII: %d\n", digits); 
   PRINTF("  Initial number: %d\n", num);
   PRINTF("  Final Decimal number: %d\n", value);
   #endif
-  free_words( (uint32_t*)ptr );
+  free_words( (int32_t*)ptr );
 
   if ( value != num )
   {
+    PRINTF("Error in test_data1(): Expected %d, got %d\n", num, value);
     return TEST_ERROR;
   }
   return TEST_NO_ERROR;
@@ -74,7 +76,7 @@ int8_t test_data2() {
   PRINTF("  Initial Decimal number: %d\n", num);
   PRINTF("  Final Decimal number: %d\n", value);
   #endif
-  free_words( (uint32_t*)ptr );
+  free_words( (int32_t*)ptr );
 
   if ( value != num )
   {
@@ -119,7 +121,7 @@ int8_t test_memmove1() {
     }
   }
 
-  free_words( (uint32_t*)set );
+  free_words( (int32_t*)set );
   return ret;
 }
 
@@ -157,7 +159,7 @@ int8_t test_memmove2() {
     }
   }
 
-  free_words( (uint32_t*)set );
+  free_words( (int32_t*)set );
   return ret;
 }
 
@@ -197,7 +199,7 @@ int8_t test_memmove3() {
   }
 
 
-  free_words( (uint32_t*)set );
+  free_words( (int32_t*)set );
   return ret;
 
 }
@@ -236,7 +238,7 @@ int8_t test_memcopy() {
     }
   }
 
-  free_words( (uint32_t*)set );
+  free_words( (int32_t*)set );
   return ret;
 }
 
@@ -282,7 +284,7 @@ int8_t test_memset()
     }
   }
   
-  free_words( (uint32_t*)set );
+  free_words( (int32_t*)set );
   return ret;
 }
 
@@ -318,7 +320,7 @@ int8_t test_reverse()
     }
   }
 
-  free_words( (uint32_t*)copy );
+  free_words( (int32_t*)copy );
   return ret;
 }
 

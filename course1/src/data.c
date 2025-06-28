@@ -18,84 +18,98 @@
  */
 
 
-include "data.h"
+#include "data.h"
+#include <stdint.h>
+#include <stdlib.h>
 
-uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
-	// convert data from a standard integer to a ASCII string
-	uint8_t *start = ptr;
-	int is_negative = 0;
-	// Handle zero case
-	if (data == 0) {
-		*ptr++ = '0';
-		*ptr = '\0'; // Null-terminate the string
-		return 2; // Return length of 2
-	}
+uint8_t my_itoa(int32_t data, uint8_t *ptr, uint32_t base) {
+    uint8_t *start = ptr;        // Pointer to start of buffer
+    uint8_t *head = ptr;         // Pointer used for reversal
+    int is_negative = 0;
+    uint32_t udata;
 
-	// handle negative numbers for base 10
-	if (data < 0 && base == BASE_10) {
-		*ptr++ = '-';
-		data = -data; // Make data positive for conversion
-	}
-
-	// convert integer to ASCII in reverse order
-	while (data > 0) {
-		int digit = data % base;
-		if (digit < 10) {
-			*ptr++ = '0' + digit; // Convert to ASCII character
-		} else {
-			*ptr++ = 'A' + (digit - 10); // Convert to ASCII character for hex
-		}
-		data /= base;
-	}
-
-	if (is_negative) {
-		*ptr++ = '-'; // Add negative sign if needed
-	}
-	*ptr = '\0'; // Null-terminate the string
-
-	// Reverse the string to get the correct order
-	uint8_t *end = ptr - 1;
-	while (start < end) {
-		uint8_t temp = *start;
-		*start = *end;
-		*end = temp;
-		start ++;
-		end--;
-	}
-
-	return (uint8_t)(ptr - start + (start - (ptr -1)) + 1); // Return length of the string including null terminator
-}
-
-int32_t myatoi(uint8_t *ptr, uint8_t digits, uint32_t base) {
-	int32_t result = 0;
-  int is_negative = 0;
-
-  // Check for negative sign
-  if (*ptr == '-') {
-    is_negative = 1;
-    ptr++;
-    digits--;  // minus sign is not a digit
-  }
-
-  while (digits > 0) {
-    int32_t value = 0;
-
-    if (*ptr >= '0' && *ptr <= '9') {
-      value = *ptr - '0';
-    } else if (*ptr >= 'A' && *ptr <= 'F') {
-      value = *ptr - 'A' + 10;
+    // Handle zero explicitly
+    if (data == 0) {
+        *ptr++ = '0';
+        *ptr = '\0';
+        return 2;
     }
 
-    result = result * base + value;
+    // Handle negative numbers (only if base is 10)
+    if (data < 0 && base == 10) {
+        is_negative = 1;
+        data = -data;
+    }
 
-    ptr++;
-    digits--;
-  }
+    // Convert data to unsigned (for two's complement handling in non-decimal)
+    udata = (base == 10) ? (uint32_t)data : *((uint32_t *)&data);
 
-  if (is_negative) {
-    result = -result;
-  }
+    // Convert to ASCII in reverse order
+    while (udata > 0) {
+        uint32_t digit = udata % base;
+        *ptr++ = (digit < 10) ? ('0' + digit) : ('A' + (digit - 10));
+        udata /= base;
+    }
 
-  return result;
+    // Add negative sign for base 10
+    if (is_negative) {
+        *ptr++ = '-';
+    }
+
+    *ptr = '\0';  // Null-terminate
+
+    // Reverse the string (in-place using pointer arithmetic)
+    uint8_t *end = ptr - 1;
+    while (head < end) {
+        uint8_t temp = *head;
+        *head = *end;
+        *end = temp;
+        head++;
+        end--;
+    }
+
+    return (uint8_t)(ptr - start + 1);  // Include null terminator in length
+}
+
+int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base) {
+    int32_t result = 0;
+    int is_negative = 0;
+
+    // Handle negative sign
+    if (*ptr == '-') {
+        is_negative = 1;
+        ptr++;
+        digits--;
+    }
+
+    while (digits > 0) {
+        int32_t value = 0;
+
+        if (*ptr >= '0' && *ptr <= '9') {
+            value = *ptr - '0';
+        } else if (*ptr >= 'A' && *ptr <= 'F') {
+            value = *ptr - 'A' + 10;
+        } else if (*ptr >= 'a' && *ptr <= 'f') {
+            value = *ptr - 'a' + 10;
+        } else {
+            // Invalid character for base; treat as error or skip
+            break;
+        }
+
+        result = result * base + value;
+        ptr++;
+        digits--;
+    }
+
+    if (is_negative) {
+        result = -result;
+    }
+
+	if (base != 10 && (result & 0x80000000)) {
+    	// Convert from unsigned to signed two's complement
+    	result = (int32_t)result;
+	}
+
+    return result;
 }
 

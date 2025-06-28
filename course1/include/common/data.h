@@ -39,7 +39,7 @@
  *
  * @return value The length of the resulting ASCII string.
  */
-unint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
+uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
 
 
 /**
@@ -54,6 +54,6 @@ unint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
  *
  * @return value The resulting signed integer.
  */
-int32_t myatoi(uint8_t * ptr, uint8_t digits, uint32_t base);
+int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base);
 
 #endif /* __DATA_H__ */ 
