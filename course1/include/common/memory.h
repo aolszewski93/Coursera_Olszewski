@@ -101,7 +101,7 @@ void clear_all(char * ptr, unsigned int size);
  * @param dst Pointer to destination data array
  * @param size Number of elements to copy
  *
- * @return ptr_dst Pointer to the destination.
+ * @return dst Pointer to the destination.
  */
 unint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
 
@@ -117,7 +117,7 @@ unint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
  * @param dst Pointer to destination data array
  * @param length Number of bytes to copy
  * 
- * @return ptr_dst Pointer to the destination.
+ * @return dst Pointer to the destination.
  */
 unint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length);
 
@@ -131,7 +131,7 @@ unint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length);
  * @param length Number of bytes to set
  * @param value The value to set each byte to
  * 
- * @return src_ptr Pointer to the source memory region.
+ * @return src Pointer to the source memory region.
  */
 uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value);
 
@@ -144,7 +144,7 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value);
  * @param src Pointer to the memory region
  * @param length Number of bytes to set to zero
  * 
- * @return src_ptr Pointer to the source memory region.
+ * @return src Pointer to the source memory region.
  */
 uint8_t * my_memzero(uint8_t * src, size_t length);
 
@@ -157,7 +157,7 @@ uint8_t * my_memzero(uint8_t * src, size_t length);
  * @param src Pointer to the memory region
  * @param length Number of bytes to reverse
  * 
- * @return src_ptr Pointer to the source memory region.
+ * @return src Pointer to the source memory region.
  */
 uint8_t * my_reverse(uint8_t * src, size_t length);
 
@@ -171,7 +171,7 @@ uint8_t * my_reverse(uint8_t * src, size_t length);
  * 
  * @param length The number of 32-bit words to reserve
  * 
- * @return value A pointer to the reserved memory block, or NULL if allocation fails.
+ * @return ptr A pointer to the reserved memory block, or NULL if allocation fails.
  */
 int32_t * reserve_words(size_t length);
 
